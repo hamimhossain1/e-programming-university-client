@@ -38,16 +38,22 @@ function Header() {
 
                         <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/blog">Blog</Link></Nav.Link>
                     </Nav>
-                    
-                    <Form className="d-flex">
-                        <Form.Control
+
+                    <div className="d-flex">
+
+                        <Nav.Link ><Link className='text-decoration-none fw-bold   text-dark me-3 ' to="/faq">Register</Link></Nav.Link>
+
+                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/blog">Login</Link></Nav.Link>
+
+
+                        {/* <Form.Control
                             type="search"
                             placeholder="Search"
                             className="me-2"
                             aria-label="Search"
                         />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
+                        <Button variant="outline-success">Search</Button> */}
+                    </div>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

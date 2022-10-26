@@ -3,10 +3,10 @@ import { Card } from 'react-bootstrap';
 
 const FAQ = () => {
     return (
-        <div>
+        <div className='container'>
             <h4 className='text-center mt-5 text-success'> FAQ section.</h4>
 
-            <Card className='w-50 mx-auto bg-light m-4'>
+            <Card className='w-75 mx-auto bg-light m-4'>
                 <Card.Body>
                     <Card.Title>1. What do you mean by “Computer Programming”?</Card.Title>
                     <Card.Text>
@@ -23,7 +23,7 @@ const FAQ = () => {
                 </Card.Body>
             </Card>
 
-            <Card className='w-50 mx-auto bg-light m-4'>
+            <Card className='w-75 mx-auto bg-light m-4'>
                 <Card.Body>
                     <Card.Title>2. Do you know about High level and Low-level programming languages?</Card.Title>
                     <Card.Text>

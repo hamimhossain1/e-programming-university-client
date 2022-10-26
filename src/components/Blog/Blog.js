@@ -5,7 +5,7 @@ const Blog = () => {
     return (
         <div className='container '>
             <h3 className='text-center m-4 text-success'> Blog section</h3>
-            <Card className='w-50 mx-auto bg-light m-4'>
+            <Card className='w-75   mx-auto bg-light m-4'>
                 <Card.Body>
                     <Card.Title>1.What is cors?</Card.Title>
                     <Card.Text>
@@ -18,7 +18,7 @@ const Blog = () => {
                 </Card.Body>
             </Card>
 
-            <Card className='w-50 mx-auto bg-light m-4'>
+            <Card className='w-75 mx-auto bg-light m-4'>
                 <Card.Body>
                     <Card.Title>2. Why are you using firebase? What other options do you gave to implement authentication?</Card.Title>
                     <Card.Text>
@@ -34,7 +34,7 @@ const Blog = () => {
                 </Card.Body>
 
             </Card>
-            <Card className='w-50 mx-auto bg-light m-4'>
+            <Card className='w-75 mx-auto bg-light m-4'>
                 <Card.Body>
                     <Card.Title>3. How dose the private route work?</Card.Title>
                     <Card.Text>
@@ -42,7 +42,7 @@ const Blog = () => {
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <Card className='w-50 mx-auto bg-light mt-4 mb-5'>
+            <Card className='w-75 mx-auto bg-light mt-4 mb-5'>
                 <Card.Body>
                     <Card.Title>4. What is Node? How does Node work?</Card.Title>
                     <Card.Text>

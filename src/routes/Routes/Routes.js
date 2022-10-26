@@ -13,14 +13,19 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Main></Main>,
         errorElement: <Error></Error>,
-        children:[
-            {path: '/', element: <Home></Home>},
-            {path: '/home', element: <Home></Home>},
-            {path: '/courses', element: <Courses></Courses>},
-            {path: '/faq', element: <FAQ></FAQ>},
-            {path: '/blog', element: <Blog></Blog>},
-            {path: '/register', element: <Register></Register>},
-            {path: '/login', element: <Login></Login>},
+        children: [
+            { path: '/', element: <Home></Home> },
+            { path: '/home', element: <Home></Home> },
+
+            {
+                path: '/courses',
+                element: <Courses></Courses>,
+                loader: () => fetch(`http://localhost:5000/courses`),
+            },
+            { path: '/faq', element: <FAQ></FAQ> },
+            { path: '/blog', element: <Blog></Blog> },
+            { path: '/register', element: <Register></Register> },
+            { path: '/login', element: <Login></Login> },
         ]
     }
 ])

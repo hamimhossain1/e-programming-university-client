@@ -4,6 +4,8 @@ import Courses from "../../components/Courses/Courses";
 import Error from "../../components/Error/Error";
 import FAQ from "../../components/FAQ/FAQ";
 import Home from "../../components/Home/Home";
+import Login from "../../components/Register/Login/Login";
+import Register from "../../components/Register/Register";
 import Main from "../../layout/Main/Main";
 
 export const router = createBrowserRouter([
@@ -17,6 +19,8 @@ export const router = createBrowserRouter([
             {path: '/courses', element: <Courses></Courses>},
             {path: '/faq', element: <FAQ></FAQ>},
             {path: '/blog', element: <Blog></Blog>},
+            {path: '/register', element: <Register></Register>},
+            {path: '/login', element: <Login></Login>},
         ]
     }
 ])

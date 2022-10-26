@@ -41,9 +41,9 @@ function Header() {
 
                     <div className="d-flex">
 
-                        <Nav.Link ><Link className='text-decoration-none fw-bold   text-dark me-3 ' to="/faq">Register</Link></Nav.Link>
+                        <Nav.Link ><Link className='text-decoration-none fw-bold   text-dark me-3 ' to="/register">Register</Link></Nav.Link>
 
-                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/blog">Login</Link></Nav.Link>
+                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/login">Login</Link></Nav.Link>
 
 
                         {/* <Form.Control

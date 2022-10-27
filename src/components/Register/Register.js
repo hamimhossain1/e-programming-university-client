@@ -22,7 +22,7 @@ function Register() {
 
 
     return (
-        <div className='container bg-light rounded-2 px-1 pt-1 pb-5 mt-4 w-50'>
+        <div className='container bg-light rounded-2 px-1 pt-1 pb-5 mt-4 w-75'>
             <h3 className=' font-bold   mt-5 text-center'> Register </h3>
             <p className='text-center'>Create a new account</p>
             <Form className='mt-5 w-50 mx-auto'>

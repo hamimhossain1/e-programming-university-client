@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Login() {
     return (
-        <div className='container bg-light rounded-2 px-1 pt-1 pb-5 mt-4 w-50'>
+        <div className='container bg-light rounded-2 px-1 pt-1 pb-5 mt-4 w-75'>
             <h3 className=' font-bold  mt-5 text-center'>Login</h3>
             <p className='text-center'>Login with your account</p>
             <Form className='w-50 mx-auto mt-5'>

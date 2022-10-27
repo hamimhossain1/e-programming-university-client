@@ -23,9 +23,9 @@ const Courses = () => {
                 </div>
 
                 <div className='col-md-8 mx-auto'>
-                    <CourseDetail></CourseDetail>
+                    {/* <CourseDetail></CourseDetail> */}
                     
-                    {/* <div className='row g-5'>
+                    <div className='row g-5'>
                     {
                         courses.map(course =>
                     <div className='col-12 col-md-6 col-lg-4'>
@@ -41,7 +41,7 @@ const Courses = () => {
                         </div>
                         )
                     }
-                    </div> */}
+                    </div>
 
                 </div>
                 </div>

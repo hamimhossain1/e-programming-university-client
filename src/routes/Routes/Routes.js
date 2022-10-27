@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../../components/Blog/Blog";
+import Checkout from "../../components/Checkout/Checkout";
 import UserContext from "../../components/Contexts/UserContext/UserContext";
 import CourseDetail from "../../components/CourseDetail/CourseDetail";
 import Courses from "../../components/Courses/Courses";
@@ -16,19 +17,23 @@ export const router = createBrowserRouter([
         element: <Main></Main>,
         errorElement: <Error></Error>,
         children: [
-            { path: '/', element: <Home></Home> },
-
+            // { path: '/', element: <Home></Home> },
+            
+            {
+                path: '/',
+                element: <Home></Home>,
+                loader: () => fetch(`https://e-programming-university-server.vercel.app/courses`),
+            },
             {
                 path: '/home',
                 element: <Home></Home>,
-                loader: () => fetch(`http://localhost:5000/courses`),
+                loader: () => fetch(`https://e-programming-university-server.vercel.app/courses`),
             },
-
 
             {
                 path: '/courses',
                 element: <Courses></Courses>,
-                loader: () => fetch(`http://localhost:5000/courses`),
+                loader: () => fetch(`https://e-programming-university-server.vercel.app/courses`),
             },
             { path: '/faq', element: <FAQ></FAQ> },
             { path: '/blog', element: <Blog></Blog> },
@@ -39,7 +44,12 @@ export const router = createBrowserRouter([
             {
                 path: '/detail/:category',
                 element: <CourseDetail></CourseDetail>,
-                loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.category}`)
+                loader: ({ params }) => fetch(`https://e-programming-university-server.vercel.app/courses/${params.category}`)
+            },
+            {
+                path: '/checkout/:id',
+                element: <Checkout></Checkout>,
+                loader: ({params}) => fetch(`https://e-programming-university-server.vercel.app/id/${params.id}`)
             },
             
         ]

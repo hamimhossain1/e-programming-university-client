@@ -16,6 +16,8 @@ const CourseDetail = () => {
                             <div class="card-body">
                                 <p class="card-text">{detail.description}</p>
                                 <Link to='/home' class="btn btn-primary">Back Course List</Link>
+
+                                <Link to={`/checkout/${detail.id}`} type="button" class="btn btn-warning ms-5">Get premium access</Link>
                             </div>
                     </div>
                 

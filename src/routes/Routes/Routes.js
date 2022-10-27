@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../../components/Blog/Blog";
+import UserContext from "../../components/Contexts/UserContext/UserContext";
 import CourseDetail from "../../components/CourseDetail/CourseDetail";
 import Courses from "../../components/Courses/Courses";
 import Error from "../../components/Error/Error";
@@ -16,7 +17,13 @@ export const router = createBrowserRouter([
         errorElement: <Error></Error>,
         children: [
             { path: '/', element: <Home></Home> },
-            { path: '/home', element: <Home></Home> },
+
+            {
+                path: '/home',
+                element: <Home></Home>,
+                loader: () => fetch(`http://localhost:5000/courses`),
+            },
+
 
             {
                 path: '/courses',
@@ -27,13 +34,15 @@ export const router = createBrowserRouter([
             { path: '/blog', element: <Blog></Blog> },
             { path: '/register', element: <Register></Register> },
             { path: '/login', element: <Login></Login> },
-            // { path: '/detail', element: <CourseDetail></CourseDetail> },
 
-            { 
+
+            {
                 path: '/detail/:category',
                 element: <CourseDetail></CourseDetail>,
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.category}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.category}`)
             },
+            
         ]
-    }
+    },
+    {path:'/*', element:<Error></Error>},
 ])

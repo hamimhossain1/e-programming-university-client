@@ -1,16 +1,27 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const CourseDetail = () => {
-    const courseDetalis = useLoaderData();
-    console.log(courseDetalis)
+    const detail = useLoaderData();
+    console.log(detail)
     console.log('hello')
     return (
-        <div>
-            <h3>This is detail page</h3>
-            {/* {
-                courseDetalis.map(course => <p>{course.title}</p>)
-            } */}
+        <div className='container'>
+            <h3 className='mt-4 text-center text-success'>Course details</h3>
+            
+                
+                    <div class="card text-center w-50 mx-auto">
+                                <h5 class="card-title">{detail.title}</h5>
+                        <img src={detail.image} class="card-img-top" alt="..."/>
+                            <div class="card-body">
+                                <p class="card-text">{detail.description}</p>
+                                <Link to='/home' class="btn btn-primary">Back Course List</Link>
+                            </div>
+                    </div>
+                
+            
+
+
         </div>
     );
 };

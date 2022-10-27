@@ -12,7 +12,7 @@ function Header() {
         <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand href="#home">
-                    <Link to="/">
+                    <Link to="/home">
                         <img
                             src={logo}
                             width="40"
@@ -22,7 +22,7 @@ function Header() {
                         />
                     </Link>
                 </Navbar.Brand>
-                <Navbar.Brand href="#"><Link className='text-decoration-none fw-bold fs-2  text-dark ' to="/">E-programming University</Link></Navbar.Brand>
+                <Navbar.Brand href="#"><Link className='text-decoration-none fw-bold fs-2  text-dark ' to="/home">E-programming University</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav

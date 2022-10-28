@@ -1,16 +1,22 @@
-import { useContext } from 'react';
+import { useContext, } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/UserContext/UserContext';
 
+
+
+
+
 function Register() {
-    const {signInWithGoogle} = useContext(AuthContext);
+
+    const { signInWithGoogle, signInWithGithub} = useContext(AuthContext);
+
 
     const handleGoogleSignIn = () =>{
         signInWithGoogle()
-        .then((result) =>{
+        .then(result =>{
             const user = result.user;
             console.log(user);
         })
@@ -19,6 +25,16 @@ function Register() {
         })
     }
 
+    const handleGithubSignIn = () =>{
+        signInWithGithub()
+        .then((result) =>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            console.error('error:', error);
+        })
+    }
 
 
     return (
@@ -58,17 +74,22 @@ function Register() {
 
                 <p className='text-uppercase text-center mt-4 inline-block'>Login with social account</p>
                 <hr ></hr>
-                <div className='d-flex justify-content-center'>
-                <button onClick={handleGoogleSignIn} type="button" className='btn btn-light fs-5 me-3 '><FaGoogle></FaGoogle></button>
+                <div  className='d-flex justify-content-center'>
+
+                <button  onClick={handleGoogleSignIn} type="button" className='btn btn-light fs-5 me-3 '><FaGoogle></FaGoogle></button>
+
+
                 <button type="button" className=' btn btn-light fs-5 me-3'><FaFacebook></FaFacebook></button>
-                <button type="button" className=' btn btn-light fs-5 '><FaGithub></FaGithub></button>
+
+                <button onClick={handleGithubSignIn} type="button" className=' btn btn-light fs-5 '><FaGithub></FaGithub></button>
                 </div>
 
                 <p className='text-center'>Don't have an account yet? <Link to="/login" className='text-decoration-none fw-bold'>Sign In.</Link></p>
-
                
             </Form>
         </div>
+
+        
     );
 }
 

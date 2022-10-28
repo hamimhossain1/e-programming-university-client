@@ -1,13 +1,15 @@
-import Button from 'react-bootstrap/Button';
+import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png'
+import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Header() {
+
+    const {user} = useContext(AuthContext);
+
     return (
         <Navbar bg="light" expand="lg">
             <Container>
@@ -30,29 +32,28 @@ function Header() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link ><Link className='text-decoration-none fw-bold   text-dark ' to="/home">Home</Link></Nav.Link>
+                        <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/home">Home</Link></Nav.Link>
 
-                        <Nav.Link ><Link className='text-decoration-none fw-bold   text-dark ' to="/courses">Courses</Link></Nav.Link>
+                        <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/courses">Courses</Link></Nav.Link>
 
-                        <Nav.Link ><Link className='text-decoration-none fw-bold   text-dark ' to="/faq">FAQ</Link></Nav.Link>
+                        <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/faq">FAQ</Link></Nav.Link>
 
-                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/blog">Blog</Link></Nav.Link>
+                        <Nav.Link><Link className='text-decoration-none    text-dark ' to="/blog">Blog</Link></Nav.Link>
                     </Nav>
 
                     <div className="d-flex">
 
-                        <Nav.Link ><Link className='text-decoration-none fw-bold   text-dark me-3 ' to="/register">Register</Link></Nav.Link>
+                        <Nav.Link ><Link className='text-decoration-none -bold   text-dark me-2 ' to="/register">Register</Link></Nav.Link>
 
-                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/login">Login</Link></Nav.Link>
+                        <Nav.Link><Link className='text-decoration-none  me-3   text-dark ' to="/login">Login</Link></Nav.Link>
 
 
-                        {/* <Form.Control
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                        <Button variant="outline-success">Search</Button> */}
+                        <Nav.Link><Link className='text-decoration-none fw-bold  me-2 text-dark ' to="/login">{user.displayName}</Link></Nav.Link>
+
+                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/login"><img className='rounded-circle' style={{width: '30px'}} src={user.photoURL} alt="" /></Link></Nav.Link>
+
+
+                        
                     </div>
                 </Navbar.Collapse>
             </Container>

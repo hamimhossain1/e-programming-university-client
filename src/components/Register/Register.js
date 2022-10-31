@@ -11,7 +11,7 @@ import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Register() {
 
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook} = useContext(AuthContext);
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword} = useContext(AuthContext);
 
 
     const handleGoogleSignIn = () =>{
@@ -36,6 +36,7 @@ function Register() {
     }
 
     const handleGithubSignIn = () =>{
+        console.log('hello')
         signInWithGithub()
         .then((result) =>{
             const user = result.user;
@@ -46,12 +47,28 @@ function Register() {
         })
     }
 
+    const handleSubmit = (event) =>{
+        event.preventDefault()
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        
+        console.log(name, email, password)
+        signInWithEmailAndPassword()
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error => console.error('error:',error))
+    }
+
 
     return (
         <div className='container bg-light rounded-2 px-1 pt-1 pb-5 mt-4 w-75'>
             <h3 className=' font-bold   mt-5 text-center'> Register </h3>
             <p className='text-center'>Create a new account</p>
-            <Form className='mt-5 w-50 mx-auto'>
+            <Form onSubmit={handleSubmit} className='mt-5 w-50 mx-auto'>
 
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Full name</Form.Label>

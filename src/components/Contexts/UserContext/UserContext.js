@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup} from 'firebase/auth';
+import {FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup} from 'firebase/auth';
 import { FaAppStore } from 'react-icons/fa';
 import app from '../../../firebase/firebase.config';
 import { useLoaderData } from 'react-router-dom';
@@ -14,6 +14,7 @@ const UserContext = ({children}) => {
 
     const githubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
     
 
     const [user, setUser] = useState({});
@@ -21,6 +22,10 @@ const UserContext = ({children}) => {
 
     const signInWithGoogle = () =>{
        return signInWithPopup(auth, googleProvider);
+    }
+
+    const signInWithFacebook = () =>{
+        return signInWithPopup(auth, facebookProvider);
     }
 
     const signInWithGithub = ()=>{
@@ -37,7 +42,7 @@ const UserContext = ({children}) => {
         }
     },[])
 
-    const authInfo = {user, signInWithGoogle, signInWithGithub}
+    const authInfo = {user, signInWithGoogle, signInWithGithub, signInWithFacebook}
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

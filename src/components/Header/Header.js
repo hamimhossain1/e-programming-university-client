@@ -2,13 +2,14 @@ import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Header() {
 
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     return (
         <Navbar bg="light" expand="lg">
@@ -48,12 +49,18 @@ function Header() {
                         <Nav.Link><Link className='text-decoration-none  me-3   text-dark ' to="/login">Login</Link></Nav.Link>
 
 
-                        <Nav.Link><Link className='text-decoration-none fw-bold  me-2 text-dark ' to="/login">{user.displayName}</Link></Nav.Link>
+                        <Nav.Link><Link className='text-decoration-none fw-bold  me-2 text-dark ' to="/login">{user?.displayName}</Link></Nav.Link>
 
-                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/login"><img className='rounded-circle' style={{width: '30px'}} src={user.photoURL} alt="" /></Link></Nav.Link>
+                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/login">
+                            {user?.photoURL ?
+                                <img className='rounded-circle' style={{ width: '30px' }} src={user?.photoURL} alt="" />
+                                :
+                                <FaUser></FaUser>
+                            }
+                        </Link></Nav.Link>
 
 
-                        
+
                     </div>
                 </Navbar.Collapse>
             </Container>

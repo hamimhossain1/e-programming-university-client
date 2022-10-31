@@ -10,14 +10,14 @@ const CourseDetail = () => {
             <h3 className='mt-4 text-center text-success'>Course details</h3>
             
                 
-                    <div class="card text-center w-50 mx-auto">
-                                <h5 class="card-title">{detail.title}</h5>
+                    <div className="card text-center w-50 mx-auto">
+                                <h5 className="card-title">{detail.title}</h5>
                         <img src={detail.image} class="card-img-top" alt="..."/>
-                            <div class="card-body">
-                                <p class="card-text">{detail.description}</p>
-                                <Link to='/home' class="btn btn-primary">Back Course List</Link>
+                            <div className="card-body">
+                                <p className="card-text">{detail.description}</p>
+                                <Link to='/home' className="btn btn-primary">Back Course List</Link>
 
-                                <Link to={`/checkout/${detail.id}`} type="button" class="btn btn-warning ms-5">Get premium access</Link>
+                                <Link to={`/checkout/${detail.id}`} type="button" className="btn btn-warning ms-5">Get premium access</Link>
                             </div>
                     </div>
                 

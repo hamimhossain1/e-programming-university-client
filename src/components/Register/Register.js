@@ -11,7 +11,7 @@ import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Register() {
 
-    const { signInWithGoogle, signInWithGithub} = useContext(AuthContext);
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook} = useContext(AuthContext);
 
 
     const handleGoogleSignIn = () =>{
@@ -23,6 +23,16 @@ function Register() {
         .error((error) => {
             console.error('error:', error);
         })
+    }
+
+    const handleFacebookSignIn = () =>{
+        console.log('hello')
+        signInWithFacebook()
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error => console.error('error:', error))
     }
 
     const handleGithubSignIn = () =>{
@@ -43,7 +53,7 @@ function Register() {
             <p className='text-center'>Create a new account</p>
             <Form className='mt-5 w-50 mx-auto'>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Full name</Form.Label>
                     <Form.Control name="name" id="name" type="name" placeholder="Enter name" required/>
                 </Form.Group>
@@ -79,7 +89,7 @@ function Register() {
                 <button  onClick={handleGoogleSignIn} type="button" className='btn btn-light fs-5 me-3 '><FaGoogle></FaGoogle></button>
 
 
-                <button type="button" className=' btn btn-light fs-5 me-3'><FaFacebook></FaFacebook></button>
+                <button onClick={handleFacebookSignIn} type="button" className=' btn btn-light fs-5 me-3'><FaFacebook></FaFacebook></button>
 
                 <button onClick={handleGithubSignIn} type="button" className=' btn btn-light fs-5 '><FaGithub></FaGithub></button>
                 </div>

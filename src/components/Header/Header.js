@@ -12,7 +12,7 @@ function Header() {
     const { user } = useContext(AuthContext);
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar sticky="top" bg="light" expand="lg">
             <Container>
                 <Navbar.Brand href="#home">
                     <Link to="/home">
@@ -46,18 +46,25 @@ function Header() {
 
                         <Nav.Link ><Link className='text-decoration-none -bold   text-dark me-2 ' to="/register">Register</Link></Nav.Link>
 
-                        <Nav.Link><Link className='text-decoration-none  me-3   text-dark ' to="/login">Login</Link></Nav.Link>
+                        {user?.uid ?
+
+                            <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/login">
+                                {user?.photoURL ?
+                                    <img className='rounded-circle' style={{ width: '30px' }} src={user?.photoURL} alt="" />
+                                    :
+                                    <FaUser></FaUser>
+                                }
+                            </Link></Nav.Link>
+                            :
+                            <Nav.Link><Link className='text-decoration-none  me-3   text-dark ' to="/login">Login</Link></Nav.Link>
 
 
-                        <Nav.Link><Link className='text-decoration-none fw-bold  me-2 text-dark ' to="/login">{user?.displayName}</Link></Nav.Link>
+                        }
 
-                        <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/login">
-                            {user?.photoURL ?
-                                <img className='rounded-circle' style={{ width: '30px' }} src={user?.photoURL} alt="" />
-                                :
-                                <FaUser></FaUser>
-                            }
-                        </Link></Nav.Link>
+
+                        {/* <Nav.Link><Link className='text-decoration-none fw-bold  me-2 text-dark ' to="/login">{user?.displayName}</Link></Nav.Link> */}
+
+
 
 
 

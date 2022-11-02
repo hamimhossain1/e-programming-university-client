@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup} from 'firebase/auth';
+import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, updateProfile} from 'firebase/auth';
 import { FaAppStore } from 'react-icons/fa';
 import app from '../../../firebase/firebase.config';
 import { useLoaderData } from 'react-router-dom';
@@ -18,7 +18,7 @@ const UserContext = ({children}) => {
     
 
     const [user, setUser] = useState({});
-    console.log(user)
+    // console.log(user)
 
     const signInWithGoogle = () =>{
        return signInWithPopup(auth, googleProvider);
@@ -36,6 +36,10 @@ const UserContext = ({children}) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
+    const updateUserProfile = (name, photoURL) =>{
+        updateProfile(auth.currentUser, {displayName: name, photoURL: photoURL})
+    }
+
     useEffect(() =>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log('I am from onAuthStateChange', currentUser);
@@ -46,7 +50,7 @@ const UserContext = ({children}) => {
         }
     },[])
 
-    const authInfo = {user, signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword}
+    const authInfo = {user, signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword, updateUserProfile}
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

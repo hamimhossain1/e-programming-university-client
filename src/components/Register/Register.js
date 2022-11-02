@@ -11,56 +11,67 @@ import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Register() {
 
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword} = useContext(AuthContext);
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword, updateUserProfile } = useContext(AuthContext);
 
 
-    const handleGoogleSignIn = () =>{
+    const handleGoogleSignIn = () => {
         signInWithGoogle()
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .error((error) => {
-            console.error('error:', error);
-        })
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .error((error) => {
+                console.error('error:', error);
+            })
     }
 
-    const handleFacebookSignIn = () =>{
+    const handleFacebookSignIn = () => {
         console.log('hello')
         signInWithFacebook()
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error => console.error('error:', error))
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+
+                updateUserProfile()
+            })
+            .catch(error => console.error('error:', error))
     }
 
-    const handleGithubSignIn = () =>{
+    const handleGithubSignIn = () => {
         console.log('hello')
         signInWithGithub()
-        .then((result) =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch((error) => {
-            console.error('error:', error);
-        })
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                console.error('error:', error);
+            })
     }
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault()
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        
+        const photoURL = form.photoURL.value;
+
         console.log(name, email, password)
-        signInWithEmailAndPassword()
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error => console.error('error:',error))
+        signInWithEmailAndPassword(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+
+                updateUserProfile(name, photoURL)
+                    .then(() => {
+
+                    })
+                    .catch((error) => console.error('error:', error))
+
+                form.reset()
+            })
+            .catch(error => console.error('error:', error))
     }
 
 
@@ -72,23 +83,28 @@ function Register() {
 
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Full name</Form.Label>
-                    <Form.Control name="name" id="name" type="name" placeholder="Enter name" required/>
+                    <Form.Control name="name" type="text" placeholder="Enter name" required />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Photo URL</Form.Label>
+                    <Form.Control name="photoURL" type="text" placeholder="Enter PhotoURL" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control name="email" id="email" type="email" placeholder="Enter email" required/>
+                    <Form.Control name="email" type="email" placeholder="Enter email" required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control name="password" id="password" type="password" placeholder="Password" required />
+                    <Form.Control name="password" type="password" placeholder="Password" required />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                {/* <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control name="confirmPassword" id="confirmPassword" type="password" placeholder="Confirm Password " required/>
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
@@ -101,22 +117,22 @@ function Register() {
 
                 <p className='text-uppercase text-center mt-4 inline-block'>Login with social account</p>
                 <hr ></hr>
-                <div  className='d-flex justify-content-center'>
+                <div className='d-flex justify-content-center'>
 
-                <button  onClick={handleGoogleSignIn} type="button" className='btn btn-light fs-5 me-3 '><FaGoogle></FaGoogle></button>
+                    <button onClick={handleGoogleSignIn} type="button" className='btn btn-light fs-5 me-3 '><FaGoogle></FaGoogle></button>
 
 
-                <button onClick={handleFacebookSignIn} type="button" className=' btn btn-light fs-5 me-3'><FaFacebook></FaFacebook></button>
+                    <button onClick={handleFacebookSignIn} type="button" className=' btn btn-light fs-5 me-3'><FaFacebook></FaFacebook></button>
 
-                <button onClick={handleGithubSignIn} type="button" className=' btn btn-light fs-5 '><FaGithub></FaGithub></button>
+                    <button onClick={handleGithubSignIn} type="button" className=' btn btn-light fs-5 '><FaGithub></FaGithub></button>
                 </div>
 
                 <p className='text-center'>Don't have an account yet? <Link to="/login" className='text-decoration-none fw-bold'>Sign In.</Link></p>
-               
+
             </Form>
         </div>
 
-        
+
     );
 }
 

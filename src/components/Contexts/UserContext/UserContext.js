@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, updateProfile} from 'firebase/auth';
+import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, updateProfile} from 'firebase/auth';
 import { FaAppStore } from 'react-icons/fa';
 import app from '../../../firebase/firebase.config';
 import { useLoaderData } from 'react-router-dom';
@@ -40,6 +40,10 @@ const UserContext = ({children}) => {
         updateProfile(auth.currentUser, {displayName: name, photoURL: photoURL})
     }
 
+    const signOutUser = () =>{
+        signOut(auth)
+    }
+
     useEffect(() =>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log('I am from onAuthStateChange', currentUser);
@@ -50,7 +54,7 @@ const UserContext = ({children}) => {
         }
     },[])
 
-    const authInfo = {user, signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword, updateUserProfile}
+    const authInfo = {user, signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword, updateUserProfile, signOutUser}
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

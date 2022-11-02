@@ -9,7 +9,16 @@ import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Header() {
 
-    const { user } = useContext(AuthContext);
+    const { user, signOutUser } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        signOutUser()
+            .then(() => {
+
+            })
+            .catch((error) => console.error('error:', error))
+
+    }
 
     return (
         <Navbar sticky="top" bg="light" expand="lg">
@@ -44,21 +53,25 @@ function Header() {
 
                     <div className="d-flex">
 
-                        <Nav.Link ><Link className='text-decoration-none -bold   text-dark me-2 ' to="/register">Register</Link></Nav.Link>
+                        {/* <Nav.Link ><Link className='text-decoration-none -bold   text-dark me-2 ' to="/register">Register</Link></Nav.Link> */}
 
-                        {user?.uid ?
 
-                            <Nav.Link><Link className='text-decoration-none fw-bold   text-dark ' to="/login">
-                                {user?.photoURL ?
-                                    <img className='rounded-circle' style={{ width: '30px' }} src={user?.photoURL} alt="" />
-                                    :
-                                    <FaUser></FaUser>
-                                }
-                            </Link></Nav.Link>
+                        {user?.email ?
+                            <Nav.Link><Link onClick={handleSignOut} className='text-decoration-none    text-dark me-3' to="/login">Logout</Link></Nav.Link>
+
                             :
+
                             <Nav.Link><Link className='text-decoration-none  me-3   text-dark ' to="/login">Login</Link></Nav.Link>
 
+                        }
 
+
+
+                        {user?.photoURL ?
+                            <span data-bs-toggle="tooltip" data-bs-placement="bottom" title={user.displayName}>
+                                <img className='rounded-circle' style={{ width: '30px' }} src={user?.photoURL} alt="" /></span>
+                            :
+                            <FaUser></FaUser>
                         }
 
 

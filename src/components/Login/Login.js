@@ -1,13 +1,18 @@
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { FaFacebook, FaGithub, FaGoogle} from 'react-icons/fa';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Login() {
 
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword, updateUserProfile } = useContext(AuthContext);
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook, loginUser } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
 
     const handleGoogleSignIn = () => {
@@ -15,8 +20,10 @@ function Login() {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast.success('Google sign in successful.')
+                navigate(from, {replace: true});
             })
-            .error((error) => {
+            .catch((error) => {
                 console.error('error:', error);
             })
     }
@@ -27,8 +34,8 @@ function Login() {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-
-                updateUserProfile()
+                toast.success('Facebook sign in successful.')
+                navigate(from, {replace: true});
             })
             .catch(error => console.error('error:', error))
     }
@@ -39,6 +46,8 @@ function Login() {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+                toast.success('Github sign in successful.')
+                navigate(from, {replace: true});
             })
             .catch((error) => {
                 console.error('error:', error);
@@ -48,26 +57,17 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault()
         const form = event.target;
-        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        const photoURL = form.photoURL.value;
-
-        console.log(name, email, password)
-        signInWithEmailAndPassword(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-
-                updateUserProfile(name, photoURL)
-                    .then(() => {
-
-                    })
-                    .catch((error) => console.error('error:', error))
-
-                form.reset()
+        form.reset();
+        
+        loginUser(email, password)
+        .then(result => {
+            toast.success('Login successfully...!!!')
+            navigate(from, {replace: true});
+            console.log(result.user);
             })
-            .catch(error => console.error('error:', error))
+            .catch(error => toast.error(error.messages))
     }
 
 
@@ -114,11 +114,6 @@ function Login() {
                 </div>
 
                 <p className='text-center'>Don't have an account yet? <Link to="/register" className='text-decoration-none fw-bold'>Register.</Link></p>
-
-
-
-
-
 
             </Form>
         </div>

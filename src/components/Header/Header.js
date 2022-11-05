@@ -2,7 +2,8 @@ import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { FaUser } from 'react-icons/fa';
+import toast from 'react-hot-toast';
+import { FaArrowRight, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { AuthContext } from '../Contexts/UserContext/UserContext';
@@ -13,11 +14,8 @@ function Header() {
 
     const handleSignOut = () => {
         signOutUser()
-            .then(() => {
-
-            })
-            .catch((error) => console.error('error:', error))
-
+            .then(toast.success('User logged out'))
+            .catch((error) => console.log(error))
     }
 
     return (
@@ -44,30 +42,30 @@ function Header() {
                     >
                         <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/home">Home</Link></Nav.Link>
 
-                        <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/courses">Courses</Link></Nav.Link>
+                        {user?.uid || user?.email ?
+                            <>
+                                <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/courses">Courses</Link></Nav.Link>
 
-                        <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/faq">FAQ</Link></Nav.Link>
+                                <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/faq">FAQ</Link></Nav.Link>
 
-                        <Nav.Link><Link className='text-decoration-none    text-dark ' to="/blog">Blog</Link></Nav.Link>
+                                <Nav.Link><Link className='text-decoration-none    text-dark ' to="/blog">Blog</Link></Nav.Link>
+
+                                <Nav.Link><Link onClick={handleSignOut} className='text-decoration-none    text-dark me-3' to="/login">Logout <FaArrowRight></FaArrowRight> </Link></Nav.Link>
+                            </>
+                            :
+
+                            <Nav.Link><Link className='text-decoration-none  me-3   text-dark ' to="/login">Login</Link></Nav.Link>
+                        }
+
                     </Nav>
 
                     <div className="d-flex">
 
                         {/* <Nav.Link ><Link className='text-decoration-none -bold   text-dark me-2 ' to="/register">Register</Link></Nav.Link> */}
 
+                        {/* <Nav.Link><Link onClick={handleSignOut} className='text-decoration-none    text-dark me-3' to="/login">Logout</Link></Nav.Link> */}
 
-                        {user?.email ?
-                            <Nav.Link><Link onClick={handleSignOut} className='text-decoration-none    text-dark me-3' to="/login">Logout</Link></Nav.Link>
-
-                            :
-
-                            <Nav.Link><Link className='text-decoration-none  me-3   text-dark ' to="/login">Login</Link></Nav.Link>
-
-                        }
-
-
-
-                        {user?.photoURL ?
+                        {user?.uid ?
                             <span data-bs-toggle="tooltip" data-bs-placement="bottom" title={user.displayName}>
                                 <img className='rounded-circle' style={{ width: '30px' }} src={user?.photoURL} alt="" /></span>
                             :

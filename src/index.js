@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <UserContext>
     <React.StrictMode>
-      <Toaster position='top-center' duration={1000}></Toaster>
+      <Toaster position='top-center' duration={2000}></Toaster>
       <App />
     </React.StrictMode>
   </UserContext>

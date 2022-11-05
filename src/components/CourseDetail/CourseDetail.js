@@ -12,7 +12,7 @@ const CourseDetail = () => {
                 
                     <div className="card text-center w-50 mx-auto">
                                 <h5 className="card-title">{detail.title}</h5>
-                        <img src={detail.image} class="card-img-top" alt="..."/>
+                        <img src={detail.image} className="card-img-top" alt="..."/>
                             <div className="card-body">
                                 <p className="card-text">{detail.description}</p>
                                 <Link to='/home' className="btn btn-primary">Back Course List</Link>

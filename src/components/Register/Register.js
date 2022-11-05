@@ -1,8 +1,9 @@
 import { useContext, } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import toast from 'react-hot-toast';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 
@@ -11,7 +12,11 @@ import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Register() {
 
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook, signInWithEmailAndPassword, updateUserProfile } = useContext(AuthContext);
+    const { signInWithGoogle, signInWithGithub, signInWithFacebook, createInWithEmailAndPassword, updateUserProfile } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
 
     const handleGoogleSignIn = () => {
@@ -19,8 +24,10 @@ function Register() {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast.success('Google sign in successful.')
+                navigate(from, {replace: true});
             })
-            .error((error) => {
+            .catch((error) => {
                 console.error('error:', error);
             })
     }
@@ -31,8 +38,8 @@ function Register() {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-
-                updateUserProfile()
+                toast.success('Facebook sign in successful.')
+                navigate(from, {replace: true});
             })
             .catch(error => console.error('error:', error))
     }
@@ -43,6 +50,8 @@ function Register() {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+                toast.success('Github sign in successful.')
+                navigate(from, {replace: true});
             })
             .catch((error) => {
                 console.error('error:', error);
@@ -56,20 +65,23 @@ function Register() {
         const email = form.email.value;
         const password = form.password.value;
         const photoURL = form.photoURL.value;
+        form.reset()
 
-        console.log(name, email, password)
-        signInWithEmailAndPassword(email, password)
+        createInWithEmailAndPassword(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast.success('Registered successful')
+                navigate(from, {replace: true});
 
                 updateUserProfile(name, photoURL)
                     .then(() => {
-
+                        toast.success('Name updated')
                     })
-                    .catch((error) => console.error('error:', error))
+                    .catch(error => {
+                        toast.error(error.massage)
+                    });
 
-                form.reset()
             })
             .catch(error => console.error('error:', error))
     }

@@ -10,6 +10,7 @@ import Home from "../../components/Home/Home";
 import Login from "../../components/Login/Login";
 import Register from "../../components/Register/Register";
 import Main from "../../layout/Main/Main";
+import PrivetRoute from "./PrivetRoute";
 
 export const router = createBrowserRouter([
     {
@@ -48,7 +49,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/checkout/:id',
-                element: <Checkout></Checkout>,
+                element: <PrivetRoute><Checkout></Checkout></PrivetRoute>,
                 loader: ({params}) => fetch(`https://e-programming-university-server.vercel.app/id/${params.id}`)
             },
             

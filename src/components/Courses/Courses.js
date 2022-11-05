@@ -31,8 +31,8 @@ const Courses = () => {
                     <div className='col-12 col-md-6 col-lg-4'>
                             
                             <div key={course.id} className="card ">
-                                <img style={{height: '200px'}} className=' ' src={course.image}  class="card-img-top" alt="..." />
-                                <div class="card-body">
+                                <img style={{height: '200px'}} className=' ' src={course.image}  className="card-img-top" alt="..." />
+                                <div className="card-body">
                                     <Link to={`/detail/${course.category}`}  className="btn btn-primary w-100">{course.title}</Link>
                                 </div>
                             </div>

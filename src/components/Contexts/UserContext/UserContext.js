@@ -12,14 +12,15 @@ export const AuthContext = createContext()
 
 const UserContext = ({ children }) => {
 
+    const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true);
+
     const githubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
 
 
-    const [user, setUser] = useState({});
-    const [loading, setLoading] = useState(true);
-    // console.log(user)
+    
 
     const signInWithGoogle = () => {
         setLoading(true);
@@ -58,16 +59,16 @@ const UserContext = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log('I am from onAuthStateChange', currentUser);
             setUser(currentUser);
             setLoading(false);
+            console.log('I am from onAuthStateChange', currentUser);
         })
-        return () => {
-            unsubscribe();
-        }
-    }, [])
+        return () => unsubscribe();
+                  
+}, [user, loading])
 
-    const authInfo = { user, signInWithGoogle, signInWithGithub, signInWithFacebook, createInWithEmailAndPassword, updateUserProfile, signOutUser, loginUser, loading }
+
+    const authInfo = { user, signInWithGoogle, signInWithGithub, signInWithFacebook, createInWithEmailAndPassword, updateUserProfile, signOutUser, loginUser, loading, setLoading }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

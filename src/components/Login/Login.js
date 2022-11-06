@@ -66,9 +66,15 @@ function Login() {
                 toast.success('Login successfully...!!!')
                     navigate(from, { replace: true });
                     console.log(result.user);
-                
             })
-            .catch(error => toast.error(error.messages))
+            .catch(error => {
+                toast.error(error.message)
+                // console.log(error)
+                if(!user){
+                    navigate('/register')
+                    toast('Please register first')
+                }
+            })
     }
 
 

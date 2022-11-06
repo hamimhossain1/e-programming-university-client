@@ -8,13 +8,15 @@ const PrivetRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        <div className="spinner-border text-dark" role="status">
-            <span className="visually-hidden">Loading...</span>
-            <div>Loading.........</div>
+
+        return <div class="d-flex mt-5 justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     }
 
-    if (user && user.uid) {
+    if (user && user?.uid) {
         return children
     }
     return <Navigate to='/login' state={{ from: location }} replace></Navigate>

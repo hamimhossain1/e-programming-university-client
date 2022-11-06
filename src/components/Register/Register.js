@@ -73,7 +73,7 @@ function Register() {
                 console.log(user);
                 toast.success('Registered successful')
                 navigate(from, {replace: true});
-
+            
                 updateUserProfile(name, photoURL)
                     .then(() => {
                         toast.success('Name updated')

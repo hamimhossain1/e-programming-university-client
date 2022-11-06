@@ -7,6 +7,8 @@ import { FaArrowRight, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { AuthContext } from '../Contexts/UserContext/UserContext';
+import ReactSwitch from 'react-switch';
+import ToggleButton from '../ToggleButton/ToggleButton';
 
 function Header() {
 
@@ -40,6 +42,7 @@ function Header() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
+                        
                         <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/home">Home</Link></Nav.Link>
 
                         {user?.uid || user?.email ?
@@ -59,24 +62,25 @@ function Header() {
 
                     </Nav>
 
-                    <div className="d-flex">
+                    <div className="d-flex align-items-center">
 
                         {/* <Nav.Link ><Link className='text-decoration-none -bold   text-dark me-2 ' to="/register">Register</Link></Nav.Link> */}
 
                         {/* <Nav.Link><Link onClick={handleSignOut} className='text-decoration-none    text-dark me-3' to="/login">Logout</Link></Nav.Link> */}
-
+                        <div>
                         {user?.uid ?
                             <span data-bs-toggle="tooltip" data-bs-placement="bottom" title={user.displayName}>
                                 <img className='rounded-circle' style={{ width: '30px' }} src={user?.photoURL} alt="" /></span>
                             :
                             <FaUser></FaUser>
                         }
+                        </div>
 
 
                         {/* <Nav.Link><Link className='text-decoration-none fw-bold  me-2 text-dark ' to="/login">{user?.displayName}</Link></Nav.Link> */}
-
-
-
+                        <div>
+                        <Nav.Link ><Link className='text-decoration-none    text-dark ' to="/home"><ToggleButton></ToggleButton></Link></Nav.Link>
+                        </div>
 
 
                     </div>

@@ -72,7 +72,7 @@ function Login() {
                 // console.log(error)
                 if(!user){
                     navigate('/register')
-                    toast('Please register first')
+                    toast('Please register first or give valid email & password')
                 }
             })
     }

@@ -8,6 +8,7 @@ import Error from "../../components/Error/Error";
 import FAQ from "../../components/FAQ/FAQ";
 import Home from "../../components/Home/Home";
 import Login from "../../components/Login/Login";
+import OrderSummury from "../../components/OrderSummury/OrderSummury";
 import Register from "../../components/Register/Register";
 import Main from "../../layout/Main/Main";
 import PrivetRoute from "./PrivetRoute";
@@ -39,6 +40,7 @@ export const router = createBrowserRouter([
             { path: '/blog', element: <Blog></Blog> },
             { path: '/register', element: <Register></Register> },
             { path: '/login', element: <Login></Login> },
+            { path: '/summury', element: <OrderSummury></OrderSummury> },
 
 
             {

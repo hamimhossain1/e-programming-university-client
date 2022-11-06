@@ -4,19 +4,23 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import toast from 'react-hot-toast';
 import { FaArrowRight, FaUser } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { AuthContext } from '../Contexts/UserContext/UserContext';
 import ReactSwitch from 'react-switch';
 import ToggleButton from '../ToggleButton/ToggleButton';
 
 function Header() {
+    const navigate = useNavigate()
 
     const { user, signOutUser } = useContext(AuthContext);
 
     const handleSignOut = () => {
         signOutUser()
-            .then(toast.success('User logged out'))
+            .then( () =>{
+                toast.success('User logged out')
+                navigate('/summury')
+            })
             .catch((error) => console.log(error))
     }
 

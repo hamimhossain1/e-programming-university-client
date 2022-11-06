@@ -2,13 +2,13 @@ import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import toast from 'react-hot-toast';
-import { FaFacebook, FaGithub, FaGoogle} from 'react-icons/fa';
+import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/UserContext/UserContext';
 
 function Login() {
 
-    const { signInWithGoogle, signInWithGithub, signInWithFacebook, loginUser } = useContext(AuthContext);
+    const { user, signInWithGoogle, signInWithGithub, signInWithFacebook, loginUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -21,7 +21,7 @@ function Login() {
                 const user = result.user;
                 console.log(user);
                 toast.success('Google sign in successful.')
-                navigate(from, {replace: true});
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.error('error:', error);
@@ -35,7 +35,7 @@ function Login() {
                 const user = result.user;
                 console.log(user);
                 toast.success('Facebook sign in successful.')
-                navigate(from, {replace: true});
+                navigate(from, { replace: true });
             })
             .catch(error => console.error('error:', error))
     }
@@ -47,7 +47,7 @@ function Login() {
                 const user = result.user;
                 console.log(user);
                 toast.success('Github sign in successful.')
-                navigate(from, {replace: true});
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.error('error:', error);
@@ -60,12 +60,13 @@ function Login() {
         const email = form.email.value;
         const password = form.password.value;
         form.reset();
-        
+
         loginUser(email, password)
-        .then(result => {
-            toast.success('Login successfully...!!!')
-            navigate(from, {replace: true});
-            console.log(result.user);
+            .then(result => {
+                toast.success('Login successfully...!!!')
+                    navigate(from, { replace: true });
+                    console.log(result.user);
+                
             })
             .catch(error => toast.error(error.messages))
     }
@@ -77,17 +78,17 @@ function Login() {
         <div className='container bg-light rounded-2 px-1 pt-1 pb-5 mt-4 w-75'>
             <h3 className=' font-bold  mt-5 text-center'>Login</h3>
             <p className='text-center'>Login with your account</p>
-            <Form onSubmit={handleSubmit}  className='w-50 mx-auto mt-5'>
+            <Form onSubmit={handleSubmit} className='w-50 mx-auto mt-5'>
 
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control name="email"  type="email" placeholder="Enter email" required />
+                    <Form.Control name="email" type="email" placeholder="Enter email" required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control name="password"  type="password" placeholder="Password" required />
+                    <Form.Control name="password" type="password" placeholder="Password" required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
